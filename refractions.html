@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Refractions of Desire</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #e6e6e6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .passage {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            color: #ffd700;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        h2 {
+            color: #ff6b6b;
+            border-bottom: 2px solid #ff6b6b;
+            padding-bottom: 10px;
+        }
+        .choice {
+            display: block;
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 15px 25px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .choice:hover {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+        .stats {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .world-indicator {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px 0;
+            text-align: center;
+            border: 1px solid #ffd700;
+        }
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .story-image {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        .mirror-text {
+            color: #4ecdc4;
+            font-style: italic;
+            border-left: 3px solid #4ecdc4;
+            padding-left: 15px;
+            margin: 15px 0;
+        }
+        .ending {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 游戏状态存储 -->
+    <script>
+        let gameState = {
+            linguisticAptitude: 0,
+            emotionalInsight: 0,
+            currentWorld: 'reality',
+            cinematicEchoes: [],
+            visitedPassages: new Set()
+        };
+
+        function updateStats(ling = 0, emo = 0) {
+            gameState.linguisticAptitude += ling;
+            gameState.emotionalInsight += emo;
+            updateStatsDisplay();
+        }
+
+        function updateStatsDisplay() {
+            document.getElementById('ling-stat').textContent = gameState.linguisticAptitude;
+            document.getElementById('emo-stat').textContent = gameState.emotionalInsight;
+            document.getElementById('echo-stat').textContent = gameState.cinematicEchoes.length;
+        }
+
+        function addEcho(echoName) {
+            if (!gameState.cinematicEchoes.includes(echoName)) {
+                gameState.cinematicEchoes.push(echoName);
+                updateStatsDisplay();
+            }
+        }
+
+        function showPassage(passageId) {
+            document.querySelectorAll('.passage').forEach(p => p.style.display = 'none');
+            document.getElementById(passageId).style.display = 'block';
+            gameState.visitedPassages.add(passageId);
+            updateStatsDisplay();
+        }
+    </script>
+
+    <!-- 序幕：镜子 -->
+    <div id="prologue" class="passage" style="display: block;">
+        <h1>Refractions of Desire</h1>
+        
+        <div class="image-container">
+            <img src="https://via.placeholder.com/600x300/2c3e50/ffffff?text=Vivian's+Bedroom+Night" 
+                 alt="Vivian's Bedroom at Night" class="story-image">
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <strong>Linguistic Aptitude</strong><br>
+                <span id="ling-stat">0</span>
+            </div>
+            <div class="stat-item">
+                <strong>Emotional Insight</strong><br>
+                <span id="emo-stat">0</span>
+            </div>
+            <div class="stat-item">
+                <strong>Cinematic Echoes</strong><br>
+                <span id="echo-stat">0</span>
+            </div>
+        </div>
+
+        <p>"An 'A'. And a request to stay after class. For weeks, I replayed every possible meaning of that note."</p>
+        <p>"Was it just about my essay on 'Lolita'? Or was it something more? The way he said my name... 'Vivian'... it felt different."</p>
+
+        <p>You stand before your mirror, tired and confused.</p>
+        <p><strong>"What's wrong with me? He's my teacher. It's a boundary. I know this. So why does it feel like my heart is trying to cross it every time he looks at me?"</strong></p>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "Because you're asking the wrong question, little scholar. It's not 'What's wrong with me?' It's 'What is this feeling, and what is it trying to teach me?'"</p>
+        </div>
+
+        <p>The reflection in the mirror shimmers, showing a confident version of yourself.</p>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "I'm the part of you that reads between the lines. The part that knows an 'A' and a 'See me' note can feel more thrilling than any movie. Let's go to the source. Let's live the stories you've only analyzed."</p>
+        </div>
+
+        <a class="choice" onclick="showPassage('world-selection')">Continue to the Mirror Portal</a>
+    </div>
+
+    <!-- 世界选择 -->
+    <div id="world-selection" class="passage" style="display: none;">
+        <h2>Choose Your Reflection</h2>
+        
+        <div class="image-container">
+            <img src="https://via.placeholder.com/600x200/34495e/ffffff?text=Mirror+Portal" 
+                 alt="Mirror Portal" class="story-image">
+        </div>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "Your curriculum begins now. Choose your first text. Each reflection will teach you a different language of the heart."</p>
+        </div>
+
+        <div class="world-choices">
+            <a class="choice" onclick="gameState.currentWorld='gilded'; addEcho('Golden Whirlpool'); showPassage('gilded-start')">
+                The Gilded Whirlpool<br>
+                <small>Lolita - Obsession & Illusion</small>
+            </a>
+            
+            <a class="choice" onclick="gameState.currentWorld='sepia'; addEcho('Sepia Haze'); showPassage('sepia-start')">
+                The Sepia Haze<br>
+                <small>The Lover - Forbidden Love</small>
+            </a>
+            
+            <a class="choice" onclick="gameState.currentWorld='neon'; addEcho('Neon Fracture'); showPassage('neon-start')">
+                The Neon Fracture<br>
+                <small>Breakfast Club - Identity</small>
+            </a>
+        </div>
+    </div>
+
+    <!-- 洛丽塔世界开始 -->
+    <div id="gilded-start" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🌟 The Gilded Whirlpool - Lolita World
+        </div>
+        
+        <div class="image-container">
+            <img src="https://via.placeholder.com/600x300/f39c12/ffffff?text=Sunny+Suburban+Street" 
+                 alt="Sunny Suburban Street" class="story-image">
+        </div>
+
+        <p>You find yourself on a bright, sunny street. The air is warm and sweet. You touch your hair - it's long, wavy, and brilliantly blonde.</p>
+        <p><strong>"My... my hair..."</strong></p>
+
+        <p>A sleek classic car pulls up beside you. The driver, a handsome middle-aged man, smiles warmly.</p>
+
+        <p><strong>Humbert:</strong> "Well, hello there. You seem to have misplaced the sun. It's all right here in your hair."</p>
+        <p><strong>Humbert:</strong> "Can I offer a fellow sun-worshipper a ride? It's far too hot for a walk."</p>
+
+        <a class="choice" onclick="updateStats(3, -1); showPassage('gilded-response-playful')">
+            "Is that your best line, mister?"<br>
+            <small>+3 Linguistic, -1 Emotional</small>
+        </a>
+        
+        <a class="choice" onclick="updateStats(1, 2); showPassage('gilded-response-polite')">
+            "No, thank you. I'm waiting for my mother."<br>
+            <small>+1 Linguistic, +2 Emotional</small>
+        </a>
+        
+        <a class="choice" onclick="updateStats(0, 3); showPassage('gilded-response-vulnerable')">
+            "I... I don't know where I am."<br>
+            <small>+3 Emotional Insight</small>
+        </a>
+    </div>
+
+    <!-- 洛丽塔世界回应 -->
+    <div id="gilded-response-playful" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🌟 The Gilded Whirlpool - Lolita World
+        </div>
+
+        <p><strong>Humbert:</strong> "My, aren't you a bright little thing. Gets better with practice, I assure you."</p>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian (whispering):</strong> "Listen to that tone. The careful construction of charm. Does it feel familiar, Vivian? That thrill of being seen by someone who is supposed to be... off-limits?"</p>
+        </div>
+
+        <p>You've unlocked: <strong>The "See Me" Note</strong> - The first crack in the professional facade.</p>
+        <script>addEcho("See Me Note");</script>
+
+        <p><strong>Humbert:</strong> "How about some ice cream? My treat."</p>
+
+        <a class="choice" onclick="showPassage('sepia-start')">
+            "Sure. I'd like that."<br>
+            <small>Accept the invitation</small>
+        </a>
+        
+        <a class="choice" onclick="showPassage('gilded-crossword')">
+            "No, thank you. I think I should go home now."<br>
+            <small>Reject and face the truth</small>
+        </a>
+    </div>
+
+    <!-- 填字游戏 -->
+    <div id="gilded-crossword" class="passage" style="display: none;">
+        <h2>Name the Fantasy</h2>
+        
+        <div class="image-container">
+            <img src="https://via.placeholder.com/600x300/8e44ad/ffffff?text=Crossword+Puzzle" 
+                 alt="Crossword Puzzle" class="story-image">
+        </div>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "Complete this. The words are all part of his fantasy. Find them, and you break the spell."</p>
+        </div>
+
+        <p><strong>Across 1:</strong> (7 Letters) The object of Humbert's obsession</p>
+        <p><strong>Down 1:</strong> (5 Letters) A sweet treat, often associated with childish innocence</p>
+        <p><strong>Across 2:</strong> (4 Letters) The powerful, all-consuming emotion Humbert claims to feel</p>
+
+        <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin: 20px 0;">
+            <p><strong>Answers:</strong> LOLITA, LOLLIPOP, LOVE</p>
+        </div>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "See how he reduces a person to a name? A complex feeling to a simple, selfish word? This isn't love. It's a collection of symbols."</p>
+        </div>
+
+        <a class="choice" onclick="addEcho('Shattered Lollipop'); showPassage('sepia-start')">
+            Continue to The Sepia Haze<br>
+            <small>Some sweetness is just a trap</small>
+        </a>
+    </div>
+
+    <!-- 情人世界开始 -->
+    <div id="sepia-start" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🍂 The Sepia Haze - The Lover World
+        </div>
+        
+        <div class="image-container">
+            <img src="https://via.placeholder.com/600x300/8b7355/ffffff?text=Mekong+River+at+Dusk" 
+                 alt="Mekong River at Dusk" class="story-image">
+        </div>
+
+        <p>You wake up on a crowded ferry. The air is humid, heavy with the scent of the river. You look down at the muddy water and see a different reflection.</p>
+        <p><strong>"That's... not me."</strong></p>
+
+        <p>A calm, accented voice speaks behind you.</p>
+
+        <p><strong>The Lover:</strong> "Sometimes, the river shows us who we are supposed to be here. The current brought you. It often does."</p>
+        <p><strong>The Lover:</strong> "My car is there. It will take you away from the crowd."</p>
+
+        <a class="choice" onclick="showPassage('sepia-follow')">
+            "Just away from the crowd."<br>
+            <small>Follow but keep distance</small>
+        </a>
+        
+        <a class="choice" onclick="showPassage('sepia-touch')">
+            Take his hand<br>
+            <small>Let him lead you</small>
+        </a>
+    </div>
+
+    <!-- 手指触摸游戏 -->
+    <div id="sepia-touch" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🍂 The Sepia Haze - The Lover World
+        </div>
+        
+        <div class="image-container">
+            <img src="https://via.placeholder.com/600x200/d4af37/ffffff?text=Hands+Almost+Touching" 
+                 alt="Hands Almost Touching" class="story-image">
+        </div>
+
+        <p>In the intimate space of the car, his hand rests on the leather seat, just an inch from yours.</p>
+
+        <p><strong>The Lover:</strong> "You are far from home. Good."</p>
+
+        <p>How do you respond to his unspoken invitation?</p>
+
+        <a class="choice" onclick="updateStats(2, 1); showPassage('sepia-house')">
+            Gently stroke his knuckle with your thumb<br>
+            <small>+2 Linguistic, +1 Emotional</small>
+        </a>
+        
+        <a class="choice" onclick="updateStats(1, 3); showPassage('sepia-house')">
+            Tentatively touch his fingertip<br>
+            <small>+1 Linguistic, +3 Emotional</small>
+        </a>
+        
+        <a class="choice" onclick="updateStats(3, 0); showPassage('sepia-house')">
+            Boldly intertwine your fingers with his<br>
+            <small>+3 Linguistic</small>
+        </a>
+    </div>
+
+    <!-- 情人府邸 -->
+    <div id="sepia-house" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🍂 The Sepia Haze - The Lover World
+        </div>
+        
+        <div class="image-container">
+            <img src="https://via.placeholder.com/600x300/2c3e50/ffffff?text=Lover's+Mansion" 
+                 alt="Lover's Mansion" class="story-image">
+        </div>
+
+        <p><strong>The Lover:</strong> "Make yourself at home. I must speak with the servants. You may explore... within reason."</p>
+
+        <p>Which part of the house calls to you?</p>
+
+        <a class="choice" onclick="addEcho('Family Shrine'); showPassage('sepia-ending')">
+            Explore the left corridor<br>
+            <small>Discover the ancestral shrine</small>
+        </a>
+        
+        <a class="choice" onclick="addEcho('Withered Orchids'); showPassage('sepia-ending')">
+            Explore the right corridor<br>
+            <small>Find the bedroom with orchids</small>
+        </a>
+    </div>
+
+    <!-- 情人世界结局 -->
+    <div id="sepia-ending" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🍂 The Sepia Haze - Conclusion
+        </div>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "So. You tasted the ice cream, then you tasted the river. You felt his hand, and you heard his confession—whether of fear, or of longing."</p>
+        </div>
+
+        <p>Some doors, once opened, change the hallway. Remember the weight of that choice.</p>
+
+        <a class="choice" onclick="showPassage('neon-start')">
+            Continue to The Neon Fracture<br>
+            <small>Where noise replaces whispers</small>
+        </a>
+    </div>
+
+    <!-- 早餐俱乐部世界开始 -->
+    <div id="neon-start" class="passage" style="display: none;">
+        <div class="world-indicator">
+            💥 The Neon Fracture - Breakfast Club World
+        </div>
+        
+        <div class="image-container">
+            <img src="https://via.placeholder.com/600x300/9b59b6/ffffff?text=High+School+Library" 
+                 alt="High School Library" class="story-image">
+        </div>
+
+        <p>The door bursts open. A stocky, weary man strides in - the detention supervisor.</p>
+
+        <p><strong>Mr. Vernon:</strong> "Let's get one thing straight. This is not a debate club. You will not move. You will not speak. You will write a one-thousand-word essay answering the question: 'Who do you think you are?'"</p>
+
+        <p>A girl across from you - Allison, dressed all in black - flicks a pencil toward you.</p>
+
+        <p><strong>Allison:</strong> "Your shoe is untied."</p>
+
+        <a class="choice" onclick="updateStats(2, 0); showPassage('neon-allison')">
+            Flick it back harder<br>
+            <small>+2 Linguistic</small>
+        </a>
+        
+        <a class="choice" onclick="updateStats(0, 2); showPassage('neon-writing')">
+            Ignore it, start writing<br>
+            <small>+2 Emotional</small>
+        </a>
+        
+        <a class="choice" onclick="updateStats(1, 1); showPassage('neon-allison')">
+            Pick it up, break it in half<br>
+            <small>+1 Linguistic, +1 Emotional</small>
+        </a>
+    </div>
+
+    <!-- 最终选择 -->
+    <div id="final-choice" class="passage" style="display: none;">
+        <div class="ending">
+            <h2>Return to Reality</h2>
+            
+            <div class="image-container">
+                <img src="https://via.placeholder.com/600x300/34495e/ffffff?text=Your+True+Self" 
+                     alt="Your True Self" class="story-image">
+            </div>
+
+            <div class="mirror-text">
+                <p><strong>Mirror Vivian:</strong> "No more roles to play. No more scripts to follow. Time to write your own story."</p>
+            </div>
+
+            <p>You stand in your room, holding the "See me after class" note. Three stories. Three reflections. None of them were yours, but pieces of you were in all of them.</p>
+
+            <p><strong>"I'm not a character in your story, Mr. Lawrence. And you're not the hero of mine."</strong></p>
+
+            <a class="choice" onclick="showPassage('ending-reject')">
+                Crumple the note and throw it away<br>
+                <small>Complete rejection</small>
+            </a>
+            
+            <a class="choice" onclick="showPassage('ending-preserve')">
+                Place it in your journal as a memory<br>
+                <small>Learn from the experience</small>
+            </a>
+            
+            <a class="choice" onclick="showPassage('ending-transform')">
+                Write your own note in response<br>
+                <small>"I've found better stories to tell"</small>
+            </a>
+        </div>
+    </div>
+
+    <!-- 游戏结局 -->
+    <div id="ending-transform" class="passage" style="display: none;">
+        <div class="ending">
+            <h2>Your Story Begins</h2>
+            <p>Based on your journey, you achieved:</p>
+            <ul>
+                <li>Linguistic Aptitude: <span id="final-ling">0</span></li>
+                <li>Emotional Insight: <span id="final-emo">0</span></li>
+                <li>Cinematic Echoes Collected: <span id="final-echo">0</span></li>
+            </ul>
+            <p>You chose to transform your experience into something new. The weight of others' expectations finally lifts from your shoulders.</p>
+            <p><strong>Thank you for playing Refractions of Desire</strong></p>
+            <a class="choice" onclick="location.reload()">Play Again</a>
+        </div>
+        <script>
+            document.getElementById('final-ling').textContent = gameState.linguisticAptitude;
+            document.getElementById('final-emo').textContent = gameState.emotionalInsight;
+            document.getElementById('final-echo').textContent = gameState.cinematicEchoes.length;
+        </script>
+    </div>
+
+    <script>
+        // 初始化显示
+        updateStatsDisplay();
+        
+        // 自动跳转到最终选择的逻辑
+        const passages = ['gilded-response-playful', 'gilded-crossword', 'sepia-follow', 'sepia-ending', 'neon-allison', 'neon-writing'];
+        passages.forEach(passage => {
+            const element = document.getElementById(passage);
+            if (element) {
+                const choices = element.querySelectorAll('.choice');
+                if (choices.length === 1) {
+                    choices[0].onclick = function() { showPassage('final-choice'); };
+                }
+            }
+        });
+    </script>
+</body>
+</html>
